@@ -1,0 +1,34 @@
+- name: DEPLOY KEYCLOAK AND POSTGRES
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create folders for buliding
+      ansible.builtin.file:
+        path: /home/kunalagon/{{ item }}
+        state: directory
+        mode: '0755'
+        #path: /home/kunalagon/ansible-hylastix/ngnix
+        #state: directory
+        #mode: '0755'
+      loop:
+        - ansible-hylastix
+        - ansible-hylastix/keycloak
+    - name: Copy files to nginx folder
+      ansible.builtin.copy:
+        src: /home/kunalagon/devops-proba/docker-compose/dc1/{{ item }}
+        dest: /home/kunalagon/ansible-hylastix/keycloak/{{ item }}
+        #owner: kunalagon
+        #group: kunalagon
+        #mode: '0644'
+      loop:
+        - docker-compose.yml
+        - .env
+
+    - name: Start keycloak and postgres container
+      community.docker.docker_compose_v2:
+        project_src: /home/kunalagon/ansible-hylastix/keycloak/
+        #recreate: always
+        files:
+          - docker-compose.yml
+
+

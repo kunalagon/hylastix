@@ -1,0 +1,51 @@
+#- name: copy Docker Compose files
+#  copy:
+#    src: files/{{ item }}
+#    dest: /somewhere/yourproject/{{ item }}
+#  loop:
+#  - docker-compose.yml
+#- docker-compose.prod.yml
+
+# use files parameter to use multiple docker-compose.yml files
+# mind the _v2 suffix
+#- name: deploy Docker Compose stack
+#  become: true
+#  community.docker.docker_compose_v2:
+#    project_src: /home/kunalagon/devops-proba/docker-compose/dc
+#    files:
+#    - docker-compose.yml
+#    - docker-compose.prod.yml
+
+- name: Setup nginx on remote machine
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create folders for buliding
+      ansible.builtin.file:
+        path: /home/kunalagon/{{ item }}
+        state: directory
+        mode: '0755'
+        #path: /home/kunalagon/ansible-hylastix/ngnix
+        #state: directory
+        #mode: '0755'
+      loop:
+        - ansible-hylastix
+        - ansible-hylastix/ngnix
+    - name: Copy files to nginx folder
+      ansible.builtin.copy:
+        src: /home/kunalagon/devops-proba/docker-compose/dc/{{ item }}
+        dest: /home/kunalagon/ansible-hylastix/ngnix/{{ item }}
+        #owner: kunalagon
+        #group: kunalagon
+        #mode: '0644'
+      loop:
+        - docker-compose.yml
+        - nginx.conf
+        - Dockerfile
+
+    - name: Build and start nginx custom container
+      community.docker.docker_compose_v2:
+        project_src: /home/kunalagon/ansible-hylastix/ngnix/
+        recreate: always
+        files:
+          - docker-compose.yml
