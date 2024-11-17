@@ -1,16 +1,23 @@
 name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
  
 on:
- push:
-   branches:
-   - main
-   paths:
-   - terraform/**
- pull_request:
-   branches:
-   - main
-   paths:
-   - terraform/**
+# push:
+#   branches:
+#   - main
+#   paths:
+#   - terraform/**
+# pull_request:
+#   branches:
+#   - main
+#   paths:
+#   - terraform/**
+
+ workflow_dispatch:
+    inputs:
+      input:
+        description: "Test"
+        required: false
+        default: "World"
  
 env:
  # verbosity setting for Terraform logs
