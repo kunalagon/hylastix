@@ -1,0 +1,41 @@
+#version: '3.8'
+services:
+
+#  keycloak-container:
+#    image: quay.io/keycloak/keycloak:24.0.0
+#    expose:
+#      - 8080
+#    volumes:
+#      - keycloak-volume:/opt/keycloak/data
+#    environment:
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: admin
+#    command: 
+#      - start-dev
+#      - --proxy-headers=xforwarded
+#      - --hostname-strict=false
+#      - --hostname-strict-https=false
+
+  nginx-container:
+    #image: petschenek/nginx
+    #image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #    - keycloak-container
+    network_mode: host
+
+volumes:
+  keycloak-volume:
+    driver: local
+
+networks:
+  default:
+    name: keycloak-network
+    external: true
