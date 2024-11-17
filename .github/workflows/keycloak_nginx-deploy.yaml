@@ -14,7 +14,7 @@ on: workflow_dispatch
 jobs:
   deploy:
     name: Deploy Ansible Playbook
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     
     permissions:
