@@ -1,5 +1,5 @@
 - name: DEPLOY KEYCLOAK AND POSTGRES
-  hosts: localhost
+  #hosts: localhost
   gather_facts: false
   tasks:
     - name: Create folders for buliding
