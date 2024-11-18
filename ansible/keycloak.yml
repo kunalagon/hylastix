@@ -15,8 +15,8 @@
         - ansible-hylastix/keycloak
     - name: Copy files to nginx folder
       ansible.builtin.copy:
-        src: /home/kunalagon/devops-proba/docker-compose/dc1/{{ item }}
-        dest: /home/kunalagon/ansible-hylastix/keycloak/{{ item }}
+        src: ./keycloak/{{ item }}
+        dest: /home/keycloakuser/ansible-hylastix/keycloak/{{ item }}
         #owner: kunalagon
         #group: kunalagon
         #mode: '0644'
@@ -26,7 +26,7 @@
 
     - name: Start keycloak and postgres container
       community.docker.docker_compose_v2:
-        project_src: /home/kunalagon/ansible-hylastix/keycloak/
+        project_src: /home/keycloakuser/ansible-hylastix/keycloak/
         #recreate: always
         files:
           - docker-compose.yml
