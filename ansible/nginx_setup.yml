@@ -1,21 +1,3 @@
-#- name: copy Docker Compose files
-#  copy:
-#    src: files/{{ item }}
-#    dest: /somewhere/yourproject/{{ item }}
-#  loop:
-#  - docker-compose.yml
-#- docker-compose.prod.yml
-
-# use files parameter to use multiple docker-compose.yml files
-# mind the _v2 suffix
-#- name: deploy Docker Compose stack
-#  become: true
-#  community.docker.docker_compose_v2:
-#    project_src: /home/kunalagon/devops-proba/docker-compose/dc
-#    files:
-#    - docker-compose.yml
-#    - docker-compose.prod.yml
-
 - name: Setup nginx on remote machine
   hosts: azure_keycloak
   gather_facts: false
