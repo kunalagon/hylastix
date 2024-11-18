@@ -26,6 +26,7 @@
 
     - name: Start keycloak and postgres container
       community.docker.docker_compose_v2:
+        become: true
         project_src: /home/keycloakuser/ansible-hylastix/keycloak/
         #recreate: always
         files:
