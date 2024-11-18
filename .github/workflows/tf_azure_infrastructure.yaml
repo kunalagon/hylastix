@@ -149,6 +149,9 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Set up SSH
+      run: |
+        echo "${{ secrets.KEYCLOAK_VM_PUBLIC_KEY }}" > public_key.pub
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
