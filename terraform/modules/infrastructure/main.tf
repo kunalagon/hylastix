@@ -150,11 +150,11 @@ resource "azurerm_linux_virtual_machine" "keycloak_terraform_vm" {
   computer_name  = "keycloak"
   admin_username = var.username
 
-  admin_ssh_key {
-    username   = var.username
-    public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
-  }
 
+   admin_ssh_key {
+     username   = var.username
+     public_key = azurerm_ssh_public_key.keycloak.public_key
+   }
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.diagnostics_storage_account.primary_blob_endpoint
