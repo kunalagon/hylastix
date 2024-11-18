@@ -17,7 +17,7 @@
 #    - docker-compose.prod.yml
 
 - name: Setup nginx on remote machine
-  hosts: localhost
+  #hosts: localhost
   gather_facts: false
   tasks:
     - name: Create folders for buliding
