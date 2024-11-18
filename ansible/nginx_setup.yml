@@ -44,8 +44,8 @@
         - Dockerfile
 
     - name: Build and start nginx custom container
+      become: true
       community.docker.docker_compose_v2:
-        become: true
         project_src: /home/keycloakuser/ansible-hylastix/ngnix/
         recreate: always
         files:
