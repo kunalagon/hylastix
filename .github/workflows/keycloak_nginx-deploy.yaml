@@ -1,16 +1,12 @@
 name: 'Deploy Keycloak and Nginx'
-
 on: workflow_dispatch
-
 jobs:
   deploy:
     name: Deploy Ansible Playbook
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    
     permissions:
       contents: read
-  
     defaults:
       run:
         shell: bash
