@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up SSH
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+          echo "${{ secrets.KEYCLOAK_VM_PUBLIC_KEY }}" > private_key.pem
           chmod 600 private_key.pem
           
       - name: Install Ansible
@@ -35,12 +35,12 @@ jobs:
           ANSIBLE_USER: ${{ secrets.AZURE_VM_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/hosts.ini ansible/nginx_setup.yml --private-key private_key.pem -u ${{ secrets.AZURE_VM_USER }}
+          ansible-playbook -i ansible/hosts.ini ansible/nginx_setup.yml --private-key private_key.pem -u ${{ secrets.KEYCLOAK_VM_AZURE_USER }}
 
       - name: Run Ansible KEYCLAOK Deploy
         env:
           ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/hosts.ini ansible/keycloak.yml --private-key private_key.pem -u ${{ secrets.AZURE_VM_USER }}    
+          ansible-playbook -i ansible/hosts.ini ansible/keycloak.yml --private-key private_key.pem -u ${{ secrets.KEYCLOAK_VM_AZURE_USER }}    
       
