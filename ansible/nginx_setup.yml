@@ -22,10 +22,10 @@
   tasks:
     - name: Create folders for buliding
       ansible.builtin.file:
-        path: /home/kunalagon/{{ item }}
+        path: /home/keycloakuser/{{ item }}
         state: directory
         mode: '0755'
-        #path: /home/kunalagon/ansible-hylastix/ngnix
+        #path: /home/keycloakuser/ansible-hylastix/ngnix
         #state: directory
         #mode: '0755'
       loop:
@@ -33,8 +33,8 @@
         - ansible-hylastix/ngnix
     - name: Copy files to nginx folder
       ansible.builtin.copy:
-        src: /home/kunalagon/devops-proba/docker-compose/dc/{{ item }}
-        dest: /home/kunalagon/ansible-hylastix/ngnix/{{ item }}
+        src: ./ngnix/{{ item }}
+        dest: /home/keycloakuser/ansible-hylastix/ngnix/{{ item }}
         #owner: kunalagon
         #group: kunalagon
         #mode: '0644'
