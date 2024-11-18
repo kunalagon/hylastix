@@ -32,15 +32,15 @@ jobs:
 
       - name: Run Ansible NGINX Deploy
         env:
-          ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
+          ANSIBLE_USER: ${{ secrets.AZURE_VM_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/hosts.ini ansible/nginx_setup.yml --private-key private_key.pem -u ${{ secrets.ANSIBLE_USER }}
+          ansible-playbook -i ansible/hosts.ini ansible/nginx_setup.yml --private-key private_key.pem -u ${{ secrets.AZURE_VM_USER }}
 
       - name: Run Ansible KEYCLAOK Deploy
         env:
           ANSIBLE_USER: ${{ secrets.ANSIBLE_USER }}
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/hosts.ini ansible/keycloak.yml --private-key private_key.pem -u ${{ secrets.ANSIBLE_USER }}    
+          ansible-playbook -i ansible/hosts.ini ansible/keycloak.yml --private-key private_key.pem -u ${{ secrets.AZURE_VM_USER }}    
       
