@@ -4,7 +4,7 @@
   tasks:
     - name: Create folders for buliding
       ansible.builtin.file:
-        path: /home/kunalagon/{{ item }}
+        path: /home/keycloakuser/{{ item }}
         state: directory
         mode: '0755'
         #path: /home/kunalagon/ansible-hylastix/ngnix
@@ -15,7 +15,7 @@
         - ansible-hylastix/keycloak
     - name: Copy files to nginx folder
       ansible.builtin.copy:
-        src: ./keycloak/{{ item }}
+        src: keycloak/{{ item }}
         dest: /home/keycloakuser/ansible-hylastix/keycloak/{{ item }}
         #owner: kunalagon
         #group: kunalagon
