@@ -33,7 +33,7 @@
         - ansible-hylastix/ngnix
     - name: Copy files to nginx folder
       ansible.builtin.copy:
-        src: ./ngnix/{{ item }}
+        src: ngnix/{{ item }}
         dest: /home/keycloakuser/ansible-hylastix/ngnix/{{ item }}
         #owner: kunalagon
         #group: kunalagon
