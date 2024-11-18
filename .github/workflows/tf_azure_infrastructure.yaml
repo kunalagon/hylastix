@@ -5,9 +5,7 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  # TF_VAR_DB_USERNAME: ${{ secrets.TF_VAR_DB_USERNAME }}
-  # TF_VAR_DB_PASSWORD: ${{ secrets.TF_VAR_DB_PASSWORD }}
-
+  
 on:
   workflow_dispatch:
     inputs:
@@ -26,10 +24,10 @@ on:
         - Terraform_apply
         - Terraform_destroy
 
-
 permissions:
   contents: read
 
+  #----------------------------------TERAFORM APPLY--------------------------------------------------------------------------------
 jobs:
   terraform_apply:
     name: 'Terraform Apply'
@@ -52,7 +50,7 @@ jobs:
         echo "${{ secrets.KEYCLOAK_VM_PUBLIC_KEY }}" > public_key.pub
      #   chmod 600 private_key.pem
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    # Install the latest version of Terraform CLI
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       # with:
@@ -63,7 +61,7 @@ jobs:
       id: init
       run: terraform init
 
-    # Checks that all Terraform configuration files adhere to a canonical format
+    # Make Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt
 
@@ -75,14 +73,15 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
+      # On workflow_dispatch to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       id: apply
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'workflow_dispatch'
       if: github.event_name == 'workflow_dispatch'
       run: terraform apply -auto-approve -input=false
-
+      
+#----------------------------------TERAFORM DESTROY--------------------------------------------------------------------------------
   terraform_destroy:
     name: 'Terraform Destroy'
     if: ${{ github.event.inputs.action == 'Terraform_destroy' }}
@@ -106,15 +105,13 @@ jobs:
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      # with:
-      #   cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
       run: terraform init
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
+      # On 'workflow_dispatch', build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Destroy
       id: destroy
