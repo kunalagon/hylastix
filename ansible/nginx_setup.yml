@@ -45,7 +45,7 @@
 
     - name: Build and start nginx custom container
       community.docker.docker_compose_v2:
-        project_src: /home/kunalagon/ansible-hylastix/ngnix/
+        project_src: /home/keycloakuser/ansible-hylastix/ngnix/
         recreate: always
         files:
           - docker-compose.yml
