@@ -30,7 +30,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y mkcert
-          mkcert -key-file localhost.pk -cert-file localhost.cert localhost
+          #mkcert -key-file localhost.pk -cert-file localhost.cert localhost
+          mkcert -key-file localhost.pk -cert-file localhost.cert  keycloak-hylastix.uksouth.cloudapp.azure.com
           openssl pkcs12 -export -in localhost.cert -inkey localhost.pk -out truststore.p12 -passout pass:hylastix
           keytool -importkeystore -deststorepass hylastix -srcstorepass hylastix -srckeystore truststore.p12 -srcstoretype PKCS12 -destkeystore truststore.jks -deststoretype JKS
           mkdir .keycloak && mv truststore.jks .keycloak/
