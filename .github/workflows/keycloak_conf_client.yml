@@ -19,7 +19,7 @@ jobs:
         with:
             distribution: 'temurin' # See 'Supported distributions' for available options
             java-version: '21'
-      - run: java HelloWorldApp.java
+            run: java HelloWorldApp.java
       
       - name: Nista bre Set up SSH
         run: |
