@@ -20,11 +20,12 @@ jobs:
           echo "${{ secrets.KEYCLOAK_VM_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
           
-      - name: Install Ansible
+      - name: Probaj komande
         shell: bash
         run: |
           sudo apt update
           sudo apt install -y default-jre
-          wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
-          tar -xvzf keycloak-26.0.5.tar.gz
-          sh keycloak-26.0.5/bin/kcadm.sh --help
+          apt search openjdk | grep -E 'openjdk-.*-jdk/'
+          #wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
+          #tar -xvzf keycloak-26.0.5.tar.gz
+          #sh keycloak-26.0.5/bin/kcadm.sh --help
