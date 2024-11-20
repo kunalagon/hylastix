@@ -37,7 +37,8 @@ jobs:
           wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
           tar -xvzf keycloak-26.0.5.tar.gz
           sh keycloak-26.0.5/bin/kcadm.sh --help
-          keytool -version
-          file .keycloak/truststore.jks
           sh keycloak-26.0.5/bin/kcadm.sh config truststore --trustpass hylastix .keycloak/truststore.jks
+          #keytool -version
+          file .keycloak/truststore.jks
+          #sh keycloak-26.0.5/bin/kcadm.sh config truststore --trustpass hylastix .keycloak/truststore.jks
           cat .keycloak/kcadm.config
