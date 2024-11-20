@@ -43,3 +43,4 @@ jobs:
           #sh keycloak-26.0.5/bin/kcadm.sh config truststore --trustpass hylastix .keycloak/truststore.jks
           cat ~/.keycloak/kcadm.config
           #keycloak-26.0.5/bin/kcadm.sh config credentials --server https://localhost --realm master --user admin --password password
+          sh keycloak-26.0.5/bin/kcadm.sh config credentials --server https://keycloak-hylastix.uksouth.cloudapp.azure.com --realm master --user admin --password password
