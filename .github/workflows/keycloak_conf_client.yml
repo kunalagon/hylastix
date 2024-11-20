@@ -25,9 +25,6 @@ jobs:
         run: |
           echo "${{ secrets.KEYCLOAK_VM_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
-      - uses: actions/setup-java@v4
-          with:
-            java-version: '21'
           
       - name: Probaj komande
         shell: bash
