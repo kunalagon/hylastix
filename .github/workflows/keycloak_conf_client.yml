@@ -33,7 +33,7 @@ jobs:
           mkcert -key-file localhost.pk -cert-file localhost.cert localhost
           openssl pkcs12 -export -in localhost.cert -inkey localhost.pk -out truststore.p12 -passout pass:hylastix
           keytool -importkeystore -deststorepass hylastix -srcstorepass hylastix -srckeystore truststore.p12 -srcstoretype PKCS12 -destkeystore truststore.jks -deststoretype JKS
-          mkdir ${GITHUB_WORKSPACE}/.keycloak && mv truststore.jks .keycloak/
+          mkdir ${GITHUB_WORKSPACE}/.keycloak && mv truststore.jks ${GITHUB_WORKSPACE}/.keycloak/
           wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
           tar -xvzf keycloak-26.0.5.tar.gz
           sh keycloak-26.0.5/bin/kcadm.sh --help
