@@ -25,6 +25,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y default-jre
+          java -version
           apt search openjdk | grep -E 'openjdk-.*-jdk/'
           #wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
           #tar -xvzf keycloak-26.0.5.tar.gz
