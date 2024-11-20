@@ -41,6 +41,6 @@ jobs:
           #keytool -version
           file .keycloak/truststore.jks
           #sh keycloak-26.0.5/bin/kcadm.sh config truststore --trustpass hylastix .keycloak/truststore.jks
-          cat .keycloak/kcadm.config
+          cat ~/.keycloak/kcadm.config
           pwd
           echo ~
