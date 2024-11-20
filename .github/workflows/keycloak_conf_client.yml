@@ -1,0 +1,30 @@
+name: 'Configure keycloak for client auth'
+on: workflow_dispatch
+jobs:
+  configure:
+    name: Configure KeyCloak
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+#      working-directory:  ./ansible
+    #environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Nista bre Set up SSH
+        run: |
+          echo "${{ secrets.KEYCLOAK_VM_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          
+      - name: Install Ansible
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install -y default-jre
+          wget https://github.com/keycloak/keycloak/releases/download/26.0.5/keycloak-26.0.5.tar.gz
+          tar -xvzf keycloak-26.0.5.tar.gz
+          sh keycloak-26.0.5/bin/kcadm.sh --help
