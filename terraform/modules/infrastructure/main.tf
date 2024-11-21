@@ -78,7 +78,7 @@ resource "azurerm_network_security_group" "keycloak_terraform_nsg" {
 
     security_rule {
     name                       = "Apache_HTTP"
-    priority                   = 1003
+    priority                   = 1004
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
@@ -89,7 +89,7 @@ resource "azurerm_network_security_group" "keycloak_terraform_nsg" {
   }
     security_rule {
     name                       = "Apache_HTTPS"
-    priority                   = 1003
+    priority                   = 1005
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
