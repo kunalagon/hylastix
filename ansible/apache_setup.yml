@@ -1,0 +1,25 @@
+- name: Setup apache on remote machine
+  hosts: azure_keycloak
+  gather_facts: false
+  tasks:
+    - name: Create folders for buliding
+      ansible.builtin.file:
+        path: /home/keycloakuser/{{ item }}
+        state: directory
+        mode: '0755'
+      loop:
+        - ansible-hylastix
+
+    - name: Copy files to apache folder
+      ansible.builtin.copy:
+        src: ../ansible/apache
+        dest: /home/keycloakuser/ansible-hylastix/
+
+    - name: Build and start apache custom container
+      become: true
+      community.docker.docker_compose_v2:
+        project_src: /home/keycloakuser/ansible-hylastix/apache/
+        recreate: always
+        build: always
+        files:
+          - docker-compose.yml
