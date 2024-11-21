@@ -47,6 +47,6 @@ jobs:
           #keycloak-26.0.5/bin/kcadm.sh config credentials --server https://localhost --realm master --user admin --password password
           sh keycloak-26.0.5/bin/kcadm.sh config credentials --server https://keycloak-hylastix.uksouth.cloudapp.azure.com --realm master --user admin --password password
           sh keycloak-26.0.5/bin/kcadm.sh create realms -s realm=HL -s enabled=true -o
-          sh keycloak-26.0.5/bin/kcadm.sh create clients -r HL -s clientId=apache -s 'redirectUris=["http://keycloak-hylastix.uksouth.cloudapp.azure.com:180/redirect_uri"]' -i -s publicClient=true
+          sh keycloak-26.0.5/bin/kcadm.sh create clients -r HL -s clientId=hylastix -s 'redirectUris=["http://keycloak-hylastix.uksouth.cloudapp.azure.com:180/redirect_uri"]' -i -s publicClient=true
           sh keycloak-26.0.5/bin/kcadm.sh create users -s username=hylastix -s enabled=true -r HL
           sh keycloak-26.0.5/bin/kcadm.sh set-password -r HL --username hylastix --new-password hylastix
