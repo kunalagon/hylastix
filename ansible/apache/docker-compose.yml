@@ -1,0 +1,13 @@
+services:
+  apache-container:
+    #image: petschenek/nginx
+    #image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1443:1443"
+      - "180:180"
+    volumes:
+      - ./website:/usr/local/apache2/htdocs 
+    network_mode: host
