@@ -1,7 +1,8 @@
 Keycloak Test Example that runs on Microsoft Azure
 
 - How to use:
-1. ##Create azure infrastracture
+  
+1. **Create azure infrastracture**
   - **FIRST** and before all create azure cloud storage for terraform state file:
      Go to Github Actions, choose workflow **_Terraform Azure Infrastructure_**,
      **_Run Workflow_**, **_Choose the resources_**: **_./terraform/modules/tfstate_** then,
@@ -12,11 +13,11 @@ Keycloak Test Example that runs on Microsoft Azure
      **_Run Workflow_**, **_Choose the resources_**: **_./terraform/modules/infrastructure_** then,
      from **_Terraform Action To Perform_**, choose **_Terraform Apply_**.
 
-2. ##Deploy Keycloak, nginx and apache(as a client)
+2. **Deploy Keycloak, nginx and apache(as a client)**
     - Go to Github Actions, choose workflow, **_Run Workflow_**: **_Deploy Keycloak, Nginx and Apache_**
       might take a while when keycloak sets up. waiting is not implemented in ansible right now.
 
-3. ##Configure keycloak for client auth
+3. **Configure keycloak for client auth**
    -  Go to Github Actions, choose workflow, **_Run Workflow_**: **_Configure keycloak for client auth_**
 
 Now you should be able to authenticate via keycloak to get some static page.
