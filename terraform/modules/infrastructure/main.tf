@@ -64,7 +64,7 @@ resource "azurerm_network_security_group" "keycloak_terraform_nsg" {
     destination_address_prefix = "*"
   }
 
-      security_rule {
+    security_rule {
     name                       = "Keycloak_HTTPS"
     priority                   = 1003
     direction                  = "Inbound"
@@ -72,6 +72,29 @@ resource "azurerm_network_security_group" "keycloak_terraform_nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+    security_rule {
+    name                       = "Apache_HTTP"
+    priority                   = 1003
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "180"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+    security_rule {
+    name                       = "Apache_HTTPS"
+    priority                   = 1003
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "1443"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
