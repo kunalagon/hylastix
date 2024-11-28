@@ -5,8 +5,8 @@ Keycloak Test Example that runs on Microsoft Azure
 1. **Create azure infrastracture**
   - **FIRST** and before all create azure cloud storage for terraform state file:<br />
      Go to Github Actions, choose workflow **<ins>Terraform Azure Infrastructure</ins>**,<br />
-     **_Run Workflow_**, **_Choose the resources_**: **_./terraform/modules/tfstate_** then,<br />
-     from **_Terraform Action To Perform_**, choose **_Terraform Apply_**. It creates<br />
+     **<ins>Run Workflow</ins>**, **<ins>Choose the resources</ins>**: **<ins>./terraform/modules/tfstate</ins>** then,<br />
+     from **<ins>Terraform Action To Perform</ins>**, choose **<ins>Terraform Apply</ins>**. It creates<br />
      tfstate storage<br />
    - Create Infrastructure (vm, network...)<br />
      Go to Github Actions, choose workflow **_Terraform Azure Infrastructure_**,<br />
